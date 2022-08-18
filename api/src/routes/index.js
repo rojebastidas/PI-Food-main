@@ -13,7 +13,7 @@ const {API_KEY,API_KEY1,API_KEY2,API_KEY3} = process.env;
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo = async()=>{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY3}&addRecipeInformation=true&number=100`);
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`);
     //console.log(apiUrl.data.results.healthScore)
     console.log("apiurl----------",apiUrl.data);
 
@@ -88,7 +88,7 @@ router.get('/recipes/:idReceta',async(req,res)=>{
     }
 })
 router.get('/diets',async(req,res)=>{
-   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY3}&addRecipeInformation=true&number=100`); 
+   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
    //console.log("diets-----------------------------",diet);
    //dietsVal=diets.map(elem=> {
@@ -114,6 +114,30 @@ router.get('/diets',async(req,res)=>{
     res.send(allDiets);
 
    })
+   router.post('/recipes', async(req,res)=>{
+    let {
+            name, 
+            summary, 
+            healthScore,
+            step,
+            diets
+
+    }=req.body
+    
+    let recipeCrea = await Recipe.create({
+        name, 
+        summary, 
+        healthScore,
+        step
+    }) 
+    let dietsBd = await Diet.findAll({
+        where: {name : diets }
+    })
+    recipeCrea.addDiet(dietsBd)
+    res.send('Recipe adicionada correctamente')
+
+    })
+   
     
    
 module.exports = router;
