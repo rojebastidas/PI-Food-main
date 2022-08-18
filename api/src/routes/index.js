@@ -15,7 +15,7 @@ const {API_KEY,API_KEY1,API_KEY2,API_KEY3} = process.env;
 const getApiInfo = async()=>{
     const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`);
     //console.log(apiUrl.data.results.healthScore)
-    console.log("apiurl----------",apiUrl.data);
+    //console.log("apiurl----------",apiUrl.data);
 
     //console.log(apiUrl.data.healthScore)
     const apiInfo = await apiUrl.data.results?.map(el=>{
@@ -57,6 +57,8 @@ const getAllRecipes = async ()=> {
     const infoTotal = apiInfo.concat(dbInfo);
     //return apiInfo;
     return infoTotal;
+   // console.log(dbInfo);
+    //return dbInfo;
 }
 router.get('/recipes',async(req,res)=>{
     const name=req.query.name
@@ -75,10 +77,11 @@ router.get('/recipes',async(req,res)=>{
 })
 router.get('/recipes/:idReceta',async(req,res)=>{
     const {idReceta}=req.params
-    console.log(idReceta);
+    //console.log(idReceta);
     const recipesTotal = await getAllRecipes();
+
      if (idReceta){
-            let recipeName = await recipesTotal.filter(elem => elem.id=idReceta) 
+            let recipeName = await recipesTotal.filter(elem => elem.id==idReceta) 
             recipeName.length ?
             res.status(200).send(recipeName) :
             res.status(404).send('No esta la receta');
@@ -137,6 +140,18 @@ router.get('/diets',async(req,res)=>{
     res.send('Recipe adicionada correctamente')
 
     })
+
+    // router.get('recipes/:id',async (req,res)=>{
+    //     const id = req.params.id;
+    //     const recipesAll = await getAllRecipes();
+    //     if (id){
+    //         let recipeId = await recipesAll.filter(el=> el.id==id)
+    //         recipeId.length?
+    //           res.status(200).json(recipeId):
+    //           res.status.apply(404).send('Recipe no encontrada')
+    //     }
+
+    //})
    
     
    
