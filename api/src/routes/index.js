@@ -22,13 +22,14 @@ const getApiInfo = async()=>{
          return{
             id: el.id,
             name: el.title,
+            //title:el.title,
             summary: el.summary,
             healthScore: el.healthScore,
             //steps: el.analyzedInstructions.map(e=> e.steps)
             steps: el.analyzedInstructions.map(e=> e.steps.map(elem=>elem.step)),
             //diets: el.diets
             diets: el.diets?.map(e => e),
-                     
+            image: el.image,         
             //})  // .map(el => el),
             //step: el.step,
             //diet: el.diet.map(el => el),
@@ -91,7 +92,7 @@ router.get('/recipes/:idReceta',async(req,res)=>{
     }
 })
 router.get('/diets',async(req,res)=>{
-   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`); 
+   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
       apiDiets.forEach(elm=> {
         //console.log("elemenforeach",elm);
