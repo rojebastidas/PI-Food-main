@@ -1,4 +1,5 @@
 import axios from 'axios';
+require ("dotenv").config();
 const {API_KEY,API_KEY1,API_KEY2,API_KEY3} = process.env;
 
 export function getRecipes(){
@@ -27,6 +28,24 @@ export function getNameRecipes(name){
         }
     }
 }
+
+export function getDiets(){
+    return async function (dispatch){
+        var json = await axios("http://localhost:3001/diets")
+        return dispatch({type: "GET_DIETS", payload: json.data  });
+    };
+}
+
+export function postRecipes(payload){
+    return async function (dispatch){
+        const respuesta = await axios.post("http://localhost:3001/recipe", payload);
+        console.log(respuesta)
+        return respuesta;
+    }
+}
+
+
+
 
 export function filterRecipesDiets(payload){
     //console.log(payload)

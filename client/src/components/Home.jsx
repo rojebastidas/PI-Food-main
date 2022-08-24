@@ -54,7 +54,7 @@ export default function Home(){
 
     return (
         <div>
-            <Link to= '/recipe'>
+            <Link to= '/recipes'>
                 Crear receta
             </Link>
             <h1>RECETAS DE COCINA</h1>

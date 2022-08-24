@@ -2,7 +2,7 @@
 const initialState = {
     recipes: [],
     allRecipes:[],
-    diets:{}
+    diets:[]
 }
 
 
@@ -19,7 +19,11 @@ function rootReducer (state = initialState, action){
                 ...state,
                 recipes:action.payload
             }
-           
+           case "GET_DIETS":
+             return{
+                ...state,
+                diets: action.payload
+             }
 
         // case 'FILTER_RECIPES_ALF':
         //     const allRecipes = state.allRecipes
@@ -37,7 +41,10 @@ function rootReducer (state = initialState, action){
                   ...state,
                   recipes: dietsFilter 
               }
-
+         case "POST_RECIPE":
+            return{
+                ...state,
+            }
 
         case 'FILTER_CREADB':
             const allRecipes1 = state.allRecipes
