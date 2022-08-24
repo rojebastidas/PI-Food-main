@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {postRecipe, getDiets} from '../../actions/index'
+import {postRecipes, getDiets} from '../../actions/index'
 import {useDispatch, useSelector} from "react-redux";
 
 export default function CrearRecipe(){
     const dispatch = useDispatch()
+    const history = useHistory()
     const diets = useSelector((state)=> state.diets)
 
 
-const [input, setInput] =useState({
+const [inputad, setInputad] =useState({
    name:"",
    summary:"",
    healtScore: 0,
@@ -19,17 +20,38 @@ const [input, setInput] =useState({
 })
 
 function handleChange(e){ 
-    setInput({
-       ...input,
-       [e.target.name]: e.target.name
+    setInputad({
+       ...inputad,
+       [e.target.name]: e.target.value
     })
-    console.log(input)
+}    
+    console.log(inputad)
+    function handleChangehs(e){ 
+        setInputad({
+           ...inputad,
+           [e.target.name]:parseInt(e.target.value)
+        })
 }
 function handleSelect(e){
-    setInput({
-        ...input,
-        diets: [...input.diets, e.target.value]
+    setInputad({
+        ...inputad,
+        diets: [...inputad.diets, e.target.value]
     })
+}
+function handleSubmit(e){
+    e.preventDefault();
+    console.log(inputad)
+    dispatch(postRecipes(inputad))
+    alert("Receta Creada") 
+    setInputad({
+        name:"",
+        summary:"",
+        healtScore: 0,
+        image:"",
+        step:"",
+        diets:[]
+    })
+    history.push('/home')
 }
 
 useEffect(()=>{
@@ -40,12 +62,12 @@ return(
     <div>
         <Link to= '/Home'>Pagina Principal</Link> 
           <h2> Crear Recipe</h2>
-          <form>
+          <form onSubmit={(e)=>handleSubmit(e)}>
             <div>
                 <label>Nombre:</label>
                 <input
                   type="text"
-                  value={input.name}
+                  value={inputad.name}
                   name="name"
                   onChange={handleChange}  
                 />
@@ -55,18 +77,18 @@ return(
                 <textarea 
                  cols="30" 
                  rows="10"
-                 value={input.name}
+                 value={inputad.summary}
                  name="summary" 
                  onChange={handleChange}
                  />
             </div>
              <div>
                 <label >Nivel de comida saludable</label>
-                <inpput
+                <input
                   type="number"
-                  value={input.healtScore}
+                  value={parseInt(inputad.healtScore)}
                   name="healtScore"
-                  onChange={handleChange}
+                  onChange={handleChangehs}
                 />
              </div>   
              <div>
@@ -74,7 +96,7 @@ return(
                 <textarea 
                  cols="30" 
                  rows="10"
-                 value={input.step}
+                 value={inputad.step}
                  name="step" 
                  onChange={handleChange}
                  />
@@ -83,7 +105,7 @@ return(
                 <label>Imagen:</label>
                 <input
                   type="text"
-                  value={input.image}
+                  value={inputad.image}
                   name="image"
                   onChange={handleChange}
 
@@ -96,7 +118,7 @@ return(
 
                 }
             </select >
-            <ul><li>{input.diets.map(elm=> elm + ", ")}</li></ul>
+            <ul><li>{inputad.diets.map(elm=> elm + ", ")}</li></ul>
             <button type= 'submit'>Crear Receta</button>
 
           </form>

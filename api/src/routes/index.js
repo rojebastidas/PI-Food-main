@@ -92,7 +92,7 @@ router.get('/recipes/:idReceta',async(req,res)=>{
     }
 })
 router.get('/diets',async(req,res)=>{
-   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&addRecipeInformation=true&number=100`); 
+   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
       apiDiets.forEach(elm=> {
         //console.log("elemenforeach",elm);
