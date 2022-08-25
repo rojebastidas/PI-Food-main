@@ -3,16 +3,33 @@ import {Link, useHistory} from 'react-router-dom';
 import {postRecipes, getDiets} from '../../actions/index'
 import {useDispatch, useSelector} from "react-redux";
 
+function validate(input){
+    let errores = {};
+    if(!input.name){
+        errores.name ='Se debe agregar el nombre de la receta';
+    }
+     else if (!input.summary){
+         errores.summary= "Se debe agregar el resumen del plato" 
+     }else if(input.healthScore<0){
+       errores.healthScore="Puntaje fuera de rango"
+     }
+
+    return errores;
+}
+
+
 export default function CrearRecipe(){
     const dispatch = useDispatch()
     const history = useHistory()
     const diets = useSelector((state)=> state.diets)
+    const [errores, setErrores] = useState({});
 
 
-const [inputad, setInputad] =useState({
+
+const [input, setInput] =useState({
    name:"",
    summary:"",
-   healtScore: 0,
+   healthScore: 0,
    image:"",
    step:"",
    diets:[]
@@ -20,33 +37,38 @@ const [inputad, setInputad] =useState({
 })
 
 function handleChange(e){ 
-    setInputad({
-       ...inputad,
+    setInput({
+       ...input,
        [e.target.name]: e.target.value
     })
+    setErrores(validate({
+        ...input,
+        [e.target.name]: e.target.value
+    }))
+         
 }    
-    console.log(inputad)
+    console.log(input)
     function handleChangehs(e){ 
-        setInputad({
-           ...inputad,
-           [e.target.name]:parseInt(e.target.value)
+        setInput({
+           ...input,
+           [e.target.name]:e.target.value
         })
 }
 function handleSelect(e){
-    setInputad({
-        ...inputad,
-        diets: [...inputad.diets, e.target.value]
+    setInput({
+        ...input,
+        diets: [...input.diets, e.target.value]
     })
 }
 function handleSubmit(e){
     e.preventDefault();
-    console.log(inputad)
-    dispatch(postRecipes(inputad))
+    console.log(input)
+    dispatch(postRecipes(input))
     alert("Receta Creada") 
-    setInputad({
+    setInput({
         name:"",
         summary:"",
-        healtScore: 0,
+        healthScore: 0,
         image:"",
         step:"",
         diets:[]
@@ -67,36 +89,45 @@ return(
                 <label>Nombre:</label>
                 <input
                   type="text"
-                  value={inputad.name}
+                  value={input.name}
                   name="name"
                   onChange={handleChange}  
                 />
+                {errores.name && (
+                    <p className = 'error'>{errores.name}</p>
+                )} 
             </div>
             <div>
                 <label>Resumen del plato</label>
                 <textarea 
                  cols="30" 
                  rows="10"
-                 value={inputad.summary}
+                 value={input.summary}
                  name="summary" 
                  onChange={handleChange}
                  />
+                   {errores.summary && (
+                    <p className = 'error'>{errores.summary}</p>
+                )}  
             </div>
              <div>
                 <label >Nivel de comida saludable</label>
                 <input
                   type="number"
-                  value={parseInt(inputad.healtScore)}
-                  name="healtScore"
+                  value={parseInt(input.healthScore)}
+                  name="healthScore"
                   onChange={handleChangehs}
                 />
+                 {errores.healthScore && (
+                    <p className = 'error'>{errores.healthScore}</p>
+                )} 
              </div>   
              <div>
                 <label>Paso a paso</label>
                 <textarea 
                  cols="30" 
                  rows="10"
-                 value={inputad.step}
+                 value={input.step}
                  name="step" 
                  onChange={handleChange}
                  />
@@ -105,7 +136,7 @@ return(
                 <label>Imagen:</label>
                 <input
                   type="text"
-                  value={inputad.image}
+                  value={input.image}
                   name="image"
                   onChange={handleChange}
 
@@ -118,7 +149,7 @@ return(
 
                 }
             </select >
-            <ul><li>{inputad.diets.map(elm=> elm + ", ")}</li></ul>
+            <ul><li>{input.diets.map(elm=> elm + ", ")}</li></ul>
             <button type= 'submit'>Crear Receta</button>
 
           </form>

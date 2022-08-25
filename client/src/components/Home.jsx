@@ -103,11 +103,13 @@ export default function Home(){
                   />
                   <SearchBar/>
                   { //map recipes 
+                  //console.log(currentRecipes)
                     currentRecipes?.map((e)=>{
                         return(
                         <fragment>
-                            <Link to ={"/home/" + e.id}>
-                                <Card name={e.title ? e.title: e.name}   diets={e.diets.map(el=> el.concat(", "))} 
+                            <Link to ={`/recipedetail/${e.id}`}>
+                                <Card name={e.title ? e.title: e.name}   diets={e.diets.map(el=> el.concat(", "))}
+                                      healtScore ={e.healtScore ? e.healtScore: e.healthScore}  id={e.id}
                                 image={e.image}  key ={e.id}/>
                             </Link>
                         </fragment>

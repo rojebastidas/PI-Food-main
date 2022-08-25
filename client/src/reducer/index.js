@@ -2,6 +2,7 @@
 const initialState = {
     recipes: [],
     allRecipes:[],
+    recipeDetail:[],
     diets:[]
 }
 
@@ -24,6 +25,12 @@ function rootReducer (state = initialState, action){
                 ...state,
                 diets: action.payload
              }
+             //recibe un solo elemento
+            case "GET_RECIPE_DETAIL":
+                return {
+                    ...state,
+                    recipeDetail: action.payload
+                }
 
         // case 'FILTER_RECIPES_ALF':
         //     const allRecipes = state.allRecipes
