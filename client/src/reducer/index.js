@@ -1,3 +1,12 @@
+    import{ GET_RECIPES,
+            GET_NAME_RECIPES, 
+            GET_DIETS, 
+            FILTER_DIETS,
+            FILTER_CREADB,
+            ORDER_NAME,
+            ORDER_HEALT_SCORE,
+            GET_RECIPE_DETAIL
+        } from '../actions'
 
 const initialState = {
     recipes: [],
@@ -9,24 +18,24 @@ const initialState = {
 
 function rootReducer (state = initialState, action){
     switch (action.type){
-        case 'GET_RECIPES':
+        case GET_RECIPES:
             return{
                 ...state,
                 recipes: action.payload,
                 allRecipes: action.payload
             }
-        case 'GET_NAME_RECIPES':
+        case GET_NAME_RECIPES:
             return{
                 ...state,
                 recipes:action.payload
             }
-           case "GET_DIETS":
+           case GET_DIETS:
              return{
                 ...state,
                 diets: action.payload
              }
              //recibe un solo elemento
-            case "GET_RECIPE_DETAIL":
+            case GET_RECIPE_DETAIL:
                 return {
                     ...state,
                     recipeDetail: action.payload
@@ -40,7 +49,7 @@ function rootReducer (state = initialState, action){
         //         recipes: recipesOrdenAlf 
         //  }     
         
-        case 'FILTER_DIETS':
+        case FILTER_DIETS:
              const allRecipes3 = state.allRecipes
             // const dietsFilter = action.payload === 'All' ? allRecipes : allRecipes.filter(elm=>elm.status===action.payload)
             const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.diets.includes(action.payload)) 
@@ -53,7 +62,8 @@ function rootReducer (state = initialState, action){
                 ...state,
             }
 
-        case 'FILTER_CREADB':
+        case FILTER_CREADB:
+            state.recipes= state.allRecipes
             const allRecipes1 = state.allRecipes
             const creadbFilter = action.payload === 'creadb' ?  allRecipes1.filter(elm=>elm.createInDb) : allRecipes1.filter(elm => !elm.createInDb)
             return {
@@ -61,24 +71,26 @@ function rootReducer (state = initialState, action){
                 recipes: action.payload === 'All' ? state.allRecipes: creadbFilter
             }
         
-        case "ORDER_NAME":
+        case ORDER_NAME:
+            state.recipes= state.allRecipes 
             let ordenarArr = action.payload === 'asc'? 
               // {elemento}=document.getElementById
+              
                state.recipes.sort(function(a,b){
-                if(a.title > b.title){
+                if(a.name > b.name){
                     return 1;
                 }
-                if(b.title > a.title){
+                if(b.name > a.name){
                     return -1;
                 }
                 return 0;
                }): 
                 //if(action.payload === 'des_alf'){}
                 state.recipes.sort(function(a,b){
-                if(a.title > b.title){
+                if(a.name > b.name){
                     return -1;
                 }
-                if(b.title > a.title){
+                if(b.name > a.name){
                     return 1;
                 }
                 return 0;
@@ -88,7 +100,8 @@ function rootReducer (state = initialState, action){
                   recipes:ordenarArr               
             }
         
-               case "ORDER_HEALT_SCORE":  
+               case ORDER_HEALT_SCORE: 
+               state.recipes= state.allRecipes 
                let ordenarArrHs = action.payload === 'asc'? 
               // {elemento}=document.getElementById
                state.recipes.sort(function(a,b){

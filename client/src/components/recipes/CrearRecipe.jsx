@@ -10,8 +10,8 @@ function validate(input){
     }
      else if (!input.summary){
          errores.summary= "Se debe agregar el resumen del plato" 
-     }else if(input.healthScore<0){
-       errores.healthScore="Puntaje fuera de rango"
+     }else if(input.healthScore<0 || input.healthScore >100 ){
+       errores.healthScore="Puntaje fuera de rango debe estar entre 0 y 100"
      }
 
     return errores;
@@ -30,9 +30,9 @@ const [input, setInput] =useState({
    name:"",
    summary:"",
    healthScore: 0,
-   image:"",
-   step:"",
-   diets:[]
+   steps:"",
+   diets:[],
+   image:""
 
 })
 
@@ -70,7 +70,7 @@ function handleSubmit(e){
         summary:"",
         healthScore: 0,
         image:"",
-        step:"",
+        steps:"",
         diets:[]
     })
     history.push('/home')
@@ -127,8 +127,8 @@ return(
                 <textarea 
                  cols="30" 
                  rows="10"
-                 value={input.step}
-                 name="step" 
+                 value={input.steps}
+                 name="steps" 
                  onChange={handleChange}
                  />
             </div>
@@ -150,7 +150,7 @@ return(
                 }
             </select >
             <ul><li>{input.diets.map(elm=> elm + ", ")}</li></ul>
-            <button type= 'submit'>Crear Receta</button>
+            <button type= 'submit' >Crear Receta</button>
 
           </form>
     </div>

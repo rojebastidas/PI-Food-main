@@ -26,6 +26,8 @@ import {getRecipeDetail } from "../actions/index";
 
 
 const recDetail = useSelector((state)=>state.recipeDetail)
+// let {steps,name} = recDetail;
+//onsole.log("steps ",steps,name)
 return (
     <div>
         {
@@ -34,11 +36,19 @@ return (
             <h1>Hola</h1>
             <h1>Receta: {recDetail[0].name}</h1>
                <img src={recDetail[0].image} alt="img not found" />       
-                <h5>Dietas: {recDetail[0].diets + (", ")}</h5> 
+                <h5>Dietas: {!recDetail[0].createInDb? recDetail[0].diets + (", "):recDetail[0].diets.map(el=>el.name) + (", ")}</h5> 
             
                 <p>Health Score: {recDetail[0].healthScore }</p>
                 <p>Resumen del Plato: {recDetail[0].summary }</p>
-                <p>Paso a paso: {recDetail[0].steps +"  " }</p>
+                <label> Paso a paso: </label>
+                                    <p>{recDetail[0].steps +"  " }</p>
+                <label>Paso a pasd 1</label>
+
+                {/* {steps[0]} */}
+                                  
+              {/* <ol><li>{recDetail[0].steps.map(elm=> elm.map(el=> el) )}</li></ol> */}
+              {/* steps: el.analyzedInstructions?.map(e=> e.steps.map(elem=>elem.step + '* \n ')), */}
+                                     
           </div>: <p>Recipe no se encontro</p>  
         }
     </div>

@@ -22,7 +22,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    step: {
+    steps: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image:{
       type: DataTypes.STRING,
       allowNull: true,
     },

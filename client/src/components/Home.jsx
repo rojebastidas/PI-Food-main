@@ -33,7 +33,7 @@ export default function Home(){
     }
 
     function handleSortAlf(e){
-        e.preventDefault();
+         e.preventDefault();
         dispatch(orderName(e.target.value,"asc"))
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
@@ -104,25 +104,37 @@ export default function Home(){
                   <SearchBar/>
                   { //map recipes 
                   //console.log(currentRecipes)
-                    currentRecipes?.map((e)=>{
-                        return(
-                        <fragment>
-                            <Link to ={`/recipedetail/${e.id}`}>
-                                <Card name={e.title ? e.title: e.name}   diets={e.diets.map(el=> el.concat(", "))}
-                                      healtScore ={e.healtScore ? e.healtScore: e.healthScore}  id={e.id}
-                                image={e.image}  key ={e.id}/>
-                            </Link>
-                        </fragment>
-                        ) 
-                    })                    
+                    // currentRecipes?.map((e)=>{
+                    //     return(
+                    //     <fragment>
+                    //         <Link to ={`/recipedetail/${e.id}`}>
+                    //             <Card name={e.title ? e.title: e.name}   diets={e.diets.map(el=> el.concat(", "))}
+                    //                   healtScore ={e.healtScore ? e.healtScore: e.healthScore}  id={e.id}
+                    //             image={e.image}  key ={e.id}/>
+                    //         </Link>
+                    //     </fragment>
+                    //     ) 
+                    // })                    
                         
+                    currentRecipes?.map((e)=>{
+                             return(
+                             <fragment>
+                                 <Link to ={`/recipedetail/${e.id}`}>
+                                       <Card name={e.title ? e.title: e.name}  diets={ !e.createInDb? e.diets +  ', '   : e.diets.map (el=> el.name + ', ')}  
+                                        healtScore ={e.healtScore ? e.healtScore: e.healthScore}  id={e.id}
+                                     image={e.image}  key ={e.id}/>
+                                 </Link>
+                             </fragment>
+                             ) 
+                         })            
                     
                     
                     
                     //image={e.image}
 
                     //map characters
-
+                     //{/* <Card name={e.title ? e.title: e.name}  diets={e.diets.map(el=> el.concat(", "))} -- diets={!e.diets.createInDb ? e.diets.map(el=> el.concat(", ")): e.diets.map(el=> el.name +" ")} diets={!e.diets.createInDb ? e.diets.map(el=> el + ', ') : e.diets.map (elm=> elm.name + ', ')}    */}
+                      //               {/* <Card name={e.title ? e.title: e.name}  diets={e.diets.createInDb? e.diets.map(el=> el.name+ ', '): e.diets.map (el=> el + ', ') } */}    
                     // currentRecipes?.map((e)=>
                     //     return(
                     //     <fragment>

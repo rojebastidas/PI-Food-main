@@ -1,14 +1,15 @@
 import react from "react";
 import {Link} from 'react-router-dom';
 //card diets
-export default function Card({name, diets, image,healtScore,id }){
+//export default function Card({name, diets, image,healtScore,id }){
+    export default function Card({name, diets,image,healtScore,id }){
      //let hs=toString(healtScore)
      return(
          <div>
              
                 <h3>Recipe: {name}</h3>
                 <img src={image} alt="img not found" />       
-                <h5>Dietas: {diets}</h5> 
+                  <h5>Dietas: {diets}</h5>    
             
                 <p>Health Score: {healtScore}</p>
                 
