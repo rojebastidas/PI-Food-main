@@ -7,6 +7,8 @@ import Card from './recipes/Card';
 import Paginado from './recipes/Paginado';
 import SearchBar from './SearchBar';
 import { BotonStyled } from './stylecomponents/BotonStyled';
+import { DivStyled } from './stylecomponents/DivStyled';
+import { LabelStyled } from './stylecomponents/LabelStyled';
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -55,30 +57,28 @@ export default function Home(){
 
     return (
         <div> 
-            
-            <Link to= '/recipes'>
-                Crear receta
-            </Link>
-            <h1>RECETAS DE COCINA</h1>
+            <DivStyled>            
+                <h1>RECETAS DE COCINA</h1>
+            <div>
             <SearchBar/>
-            <BotonStyled onClick={e=>{handleClick(e)}}>
-                Volver a cargar todas las recetas
-            </BotonStyled>
-          <div>
-                <label>Nombre Recipe</label>
+            </div>
+            <div>
+            <LabelStyled>Name Recipe</LabelStyled>
                 <select  onChange={e=>handleSortAlf(e)}>
                     <option value = 'asc'>Ascendente </option>
                     <option value='des'>Descendente </option>
                 </select>
-                <label>Health Score</label>
+                <LabelStyled>Health Score</LabelStyled>
                 <select id='tipoOrden' onChange={e=>handleSortHealthScore(e)}>
                     <option value = 'asc'>Ascendente</option>
                     <option value='des'>Descendente</option>
                 </select>
-                           
-                
-                
-                
+            </div>
+            <div>
+                <LabelStyled>
+                 Type Diet   
+                </LabelStyled>                      
+                               
                 <select onChange={e=>handleFilterDiets(e)}> 
                 <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
                     <option value= "gluten free">gluten free</option>
@@ -92,13 +92,23 @@ export default function Home(){
                     <option value= "fodmap friendly">fodmap friendly</option>
                     
                 </select>
-                
 
+                            
+                
+                
+                <LabelStyled>Select by</LabelStyled>
                 <select onChange={e=>handleFilterCreaDb(e)}>
                     <option value='All'>Todas las recetas</option>
                     <option value='creadb'>Creadas</option>
                     <option value='infapi'>Recetas foodApi</option>
                 </select>
+                <BotonStyled onClick={e=>{handleClick(e)}}>
+                    Volver a cargar todas las recetas
+                </BotonStyled>
+                </div>   
+            </DivStyled>
+          <div>
+                
                 <Paginado
                     recipesPerPage = {recipesPerPage}
                     allRecipes={allRecipes.length}

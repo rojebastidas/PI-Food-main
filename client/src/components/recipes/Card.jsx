@@ -1,11 +1,12 @@
-import react from "react";
+import React from "react";
 import {Link} from 'react-router-dom';
+import { DivStyled } from "../stylecomponents/DivStyled";
 //card diets
 //export default function Card({name, diets, image,healtScore,id }){
     export default function Card({name, diets,image,healtScore,id }){
      //let hs=toString(healtScore)
      return(
-         <div>
+         <DivStyled>
              
                 <h3>Recipe: {name}</h3>
                 <img src={image} alt="img not found" />       
@@ -16,7 +17,7 @@ import {Link} from 'react-router-dom';
               
                        
              {/* //width="250px" height="300px" */}
-         </div>
+         </DivStyled>
 
      )
 
