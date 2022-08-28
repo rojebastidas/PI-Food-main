@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Card from './recipes/Card';
 import Paginado from './recipes/Paginado';
 import SearchBar from './SearchBar';
+import { BotonStyled } from './stylecomponents/BotonStyled';
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -53,14 +54,16 @@ export default function Home(){
     }
 
     return (
-        <div>
+        <div> 
+            
             <Link to= '/recipes'>
                 Crear receta
             </Link>
             <h1>RECETAS DE COCINA</h1>
-            <button onClick={e=>{handleClick(e)}}>
+            <SearchBar/>
+            <BotonStyled onClick={e=>{handleClick(e)}}>
                 Volver a cargar todas las recetas
-            </button>
+            </BotonStyled>
           <div>
                 <label>Nombre Recipe</label>
                 <select  onChange={e=>handleSortAlf(e)}>
@@ -101,7 +104,7 @@ export default function Home(){
                     allRecipes={allRecipes.length}
                     paginado={paginado}
                   />
-                  <SearchBar/>
+                  
                   { //map recipes 
                   //console.log(currentRecipes)
                     // currentRecipes?.map((e)=>{

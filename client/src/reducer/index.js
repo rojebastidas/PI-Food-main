@@ -63,20 +63,22 @@ function rootReducer (state = initialState, action){
             }
 
         case FILTER_CREADB:
-            state.recipes= state.allRecipes
+            //state.recipes= state.allRecipes
             const allRecipes1 = state.allRecipes
             const creadbFilter = action.payload === 'creadb' ?  allRecipes1.filter(elm=>elm.createInDb) : allRecipes1.filter(elm => !elm.createInDb)
             return {
                 ...state,
-                recipes: action.payload === 'All' ? state.allRecipes: creadbFilter
+                recipes: action.payload === 'All' ? allRecipes1 : creadbFilter
+                //recipes: action.payload === 'All' ? state.allRecipes : creadbFilter
             }
         
         case ORDER_NAME:
-            state.recipes= state.allRecipes 
+            //state.recipes= state.allRecipes
+            const allRecipes4 = state.allRecipes
             let ordenarArr = action.payload === 'asc'? 
               // {elemento}=document.getElementById
               
-               state.recipes.sort(function(a,b){
+               allRecipes4.sort(function(a,b){
                 if(a.name > b.name){
                     return 1;
                 }
@@ -86,7 +88,7 @@ function rootReducer (state = initialState, action){
                 return 0;
                }): 
                 //if(action.payload === 'des_alf'){}
-                state.recipes.sort(function(a,b){
+                allRecipes4.sort(function(a,b){
                 if(a.name > b.name){
                     return -1;
                 }
@@ -101,10 +103,10 @@ function rootReducer (state = initialState, action){
             }
         
                case ORDER_HEALT_SCORE: 
-               state.recipes= state.allRecipes 
+               const allRecipes5=state.allRecipes
                let ordenarArrHs = action.payload === 'asc'? 
               // {elemento}=document.getElementById
-               state.recipes.sort(function(a,b){
+               allRecipes5.sort(function(a,b){
                 if(a.healthScore > b.healthScore){
                     return 1;
                 }
@@ -114,7 +116,7 @@ function rootReducer (state = initialState, action){
                 return 0;
                }): 
                 //if(action.payload === 'des_alf'){}
-                state.recipes.sort(function(a,b){
+                allRecipes5.sort(function(a,b){
                 if(a.healthScore > b.healthScore){
                     return -1;
                 }

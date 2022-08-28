@@ -2,28 +2,44 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {postRecipes, getDiets} from '../../actions/index'
 import {useDispatch, useSelector} from "react-redux";
+import { BotonStyled } from '../stylecomponents/BotonStyled';
 
 function validate(input){
-    let errores = {};
-    if(!input.name){
-        errores.name ='Se debe agregar el nombre de la receta';
-    }
-     else if (!input.summary){
-         errores.summary= "Se debe agregar el resumen del plato" 
-     }else if(input.healthScore<0 || input.healthScore >100 ){
-       errores.healthScore="Puntaje fuera de rango debe estar entre 0 y 100"
+    // let errores = {};
+    // if(!input.name){
+    //     errores.name ='Se debe agregar el nombre de la receta';
+    // }
+    //  else if (!input.summary){
+    //      errores.summary= "Se debe agregar el resumen del plato" 
+    //  }else if(input.healthScore<0 || input.healthScore >100 ){
+    //    errores.healthScore="Puntaje fuera de rango debe estar entre 0 y 100"
+    //  }
+     let errores = {};
+     if(!input.name){
+         errores.name ='Se debe agregar el nombre de la receta';
+         console.log("erores name",errores.name)
      }
-
+     if (!input.summary){
+         errores.summary= "Se debe agregar el resumen del plato" 
+         console.log("erores name",errores.summary)
+     }
+     if(input.healthScore<0 || input.healthScore >100 ){
+        errores.healthScore="Puntaje fuera de rango debe estar entre 0 y 100"
+        console.log("erores name",errores.healthScore)
+     }       
+ 
+     
     return errores;
 }
 
 
 export default function CrearRecipe(){
+    //let inicial =0;
     const dispatch = useDispatch()
     const history = useHistory()
     const diets = useSelector((state)=> state.diets)
     const [errores, setErrores] = useState({});
-
+    const [botonactivo, setBotonactivo]=useState(false);
 
 
 const [input, setInput] =useState({
@@ -41,19 +57,25 @@ function handleChange(e){
        ...input,
        [e.target.name]: e.target.value
     })
-    setErrores(validate({
+    let objError = validate({
         ...input,
         [e.target.name]: e.target.value
-    }))
-         
+    })
+    setErrores(objError)
+    //console.log("objerror",objError);    
+    // errores.hasOwnProperty('name') && errores.hasOwnProperty('summary') && errores.hasOwnProperty('healthScore') ?
+    //     setBotonactivo(botonactivo=>false) :
+    //  setBotonactivo(botonactivo=>true)
+     
 }    
-    console.log(input)
-    function handleChangehs(e){ 
-        setInput({
-           ...input,
-           [e.target.name]:e.target.value
-        })
-}
+   // console.log("input", input);
+    
+    // function handleChangehs(e){ 
+    //     setInput({
+    //        ...input,
+    //        [e.target.name]:e.target.value
+    //     })
+//}
 function handleSelect(e){
     setInput({
         ...input,
@@ -91,6 +113,8 @@ return(
                   type="text"
                   value={input.name}
                   name="name"
+                  placeholder='Ingrese nombre de la receta'
+                  className={errores.name && 'danger'}
                   onChange={handleChange}  
                 />
                 {errores.name && (
@@ -104,6 +128,8 @@ return(
                  rows="10"
                  value={input.summary}
                  name="summary" 
+                 className={errores.summary && 'danger'}
+                 placeholder='Ingrese el resumen del plato'
                  onChange={handleChange}
                  />
                    {errores.summary && (
@@ -116,7 +142,8 @@ return(
                   type="number"
                   value={parseInt(input.healthScore)}
                   name="healthScore"
-                  onChange={handleChangehs}
+                  className={errores.healthScore && 'danger'}
+                  onChange={handleChange}
                 />
                  {errores.healthScore && (
                     <p className = 'error'>{errores.healthScore}</p>
@@ -129,6 +156,7 @@ return(
                  rows="10"
                  value={input.steps}
                  name="steps" 
+                 placeholder='Ingrese el paso a paso de preparación de la receta'
                  onChange={handleChange}
                  />
             </div>
@@ -138,6 +166,7 @@ return(
                   type="text"
                   value={input.image}
                   name="image"
+                  placeholder='Ingrese url de la imagen'
                   onChange={handleChange}
 
                 />
@@ -150,7 +179,13 @@ return(
                 }
             </select >
             <ul><li>{input.diets.map(elm=> elm + ", ")}</li></ul>
-            <button type= 'submit' >Crear Receta</button>
+            {    
+                errores.hasOwnProperty('name') || errores.hasOwnProperty('summary') || errores.hasOwnProperty('healthScore') ?
+                <p> Favor completar la informacion requerida </p>:<BotonStyled type= 'submit' >Crear Receta</BotonStyled> 
+                
+              }
+            
+             
 
           </form>
     </div>

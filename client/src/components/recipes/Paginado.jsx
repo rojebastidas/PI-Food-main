@@ -1,4 +1,5 @@
 import React from 'react';
+import { AStyled, LiStyled, UlStyled } from '../stylecomponents/UlStyled';
 export default function Paginado({recipesPerPage,allRecipes,paginado}){
     const pageNumbers = []
 
@@ -7,17 +8,17 @@ export default function Paginado({recipesPerPage,allRecipes,paginado}){
     }
     return (
         <nav>
-            <ul className = 'paginado'>
+            <UlStyled className = 'paginado'>
                 {
                     pageNumbers?.map(number =>(
-                        <li className= 'number' key ={number}>
-                            <a onClick={()=>paginado(number)}>{number}</a>
+                        <LiStyled className= 'number' key ={number}>
+                            <AStyled onClick={()=>paginado(number)}>{number}</AStyled>
 
-                        </li>
+                        </LiStyled>
                     ))
             }
 
-        </ul>
+        </UlStyled>
     </nav>
 )
 
