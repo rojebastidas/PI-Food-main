@@ -3,7 +3,7 @@ import React from 'react';
 import styled from "styled-components"
 
 export const LabelStyled = styled.label`
-  background: orange;
+  background: green;
   margin: 1em;
   padding: 2px 2px;
   border: 2px solid #09f;

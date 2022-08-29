@@ -6,8 +6,8 @@ import {Link} from 'react-router-dom';
 import Card from './recipes/Card';
 import Paginado from './recipes/Paginado';
 import SearchBar from './SearchBar';
-import { BotonStyled } from './stylecomponents/BotonStyled';
-import { DivStyled } from './stylecomponents/DivStyled';
+import { BotonStyled1 } from './stylecomponents/BotonStyled';
+import { DivStyled2, DivStyled3 } from './stylecomponents/DivStyled';
 import { LabelStyled } from './stylecomponents/LabelStyled';
 
 export default function Home(){
@@ -28,7 +28,7 @@ export default function Home(){
 
     },[dispatch])
     function handleClick(e){
-        e.preventDefault();
+        //e.preventDefault();
         dispatch(getRecipes());
     }
     function handleFilterDiets(e){
@@ -57,12 +57,11 @@ export default function Home(){
 
     return (
         <div> 
-            <DivStyled>            
-                <h1>RECETAS DE COCINA</h1>
-            <div>
-            <SearchBar/>
-            </div>
-            <div>
+            <DivStyled2>            
+                <h1>COOKING RECIPES</h1>
+                        <SearchBar/>
+            <DivStyled3>
+            <LabelStyled>Order By: </LabelStyled>    
             <LabelStyled>Name Recipe</LabelStyled>
                 <select  onChange={e=>handleSortAlf(e)}>
                     <option value = 'asc'>Ascendente </option>
@@ -73,13 +72,12 @@ export default function Home(){
                     <option value = 'asc'>Ascendente</option>
                     <option value='des'>Descendente</option>
                 </select>
-            </div>
-            <div>
                 <LabelStyled>
                  Type Diet   
                 </LabelStyled>                      
                                
                 <select onChange={e=>handleFilterDiets(e)}> 
+                <option value="All">Todas</option>
                 <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
                     <option value= "gluten free">gluten free</option>
                     <option value= "dairy free">dairy free</option>
@@ -94,6 +92,9 @@ export default function Home(){
                 </select>
 
                             
+            </DivStyled3>
+            <DivStyled3>
+                
                 
                 
                 <LabelStyled>Select by</LabelStyled>
@@ -102,11 +103,11 @@ export default function Home(){
                     <option value='creadb'>Creadas</option>
                     <option value='infapi'>Recetas foodApi</option>
                 </select>
-                <BotonStyled onClick={e=>{handleClick(e)}}>
+                <BotonStyled1 onClick={e=>{handleClick(e)}}>
                     Volver a cargar todas las recetas
-                </BotonStyled>
-                </div>   
-            </DivStyled>
+                </BotonStyled1>    
+             </DivStyled3>   
+            </DivStyled2>
           <div>
                 
                 <Paginado

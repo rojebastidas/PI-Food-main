@@ -20,3 +20,21 @@ export const DivStyled = styled.div`
     border-color: black;
   }
   `
+  export const DivStyled2 = styled.div`
+  background: #e5e5e5;
+  
+  font-size: 1em;
+  margin-left: 20em;
+  margin-right: 20em;
+  margin-top: 2em;
+  margin-botton: 2em;
+  border: 4px solid #09f;
+    }
+  `
+
+  export const DivStyled3 = styled.div`
+  background: #e5e5e5;
+  font-size: 1em;
+  border: 3px solid #09f;
+    }
+  `

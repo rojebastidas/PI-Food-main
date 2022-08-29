@@ -41,6 +41,15 @@ export default function CrearRecipe(){
     const [errores, setErrores] = useState({});
     const [botonactivo, setBotonactivo]=useState(false);
 
+    // useEffect((input)=>{
+    //    // errores.name ='Se debe agregar el nombre de la receta';
+    //     let objError = validate({
+    //         ...input,
+    //            input.name
+    //     })
+    //     setErrores(objError)
+    // },[])
+
 
 const [input, setInput] =useState({
    name:"",
@@ -51,6 +60,7 @@ const [input, setInput] =useState({
    image:""
 
 })
+
 
 function handleChange(e){ 
     setInput({
@@ -100,6 +110,7 @@ function handleSubmit(e){
 
 useEffect(()=>{
     dispatch(getDiets());
+    setErrores({name: 'Se debe agregar el nombre de la receta', summary: "Se debe agregar el resumen del plato"})
 },[]);
 
 return(

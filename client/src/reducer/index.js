@@ -52,7 +52,9 @@ function rootReducer (state = initialState, action){
         case FILTER_DIETS:
              const allRecipes3 = state.allRecipes
             // const dietsFilter = action.payload === 'All' ? allRecipes : allRecipes.filter(elm=>elm.status===action.payload)
-            const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.diets.includes(action.payload)) 
+            //const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.createInDb? elm.diets.map(el=> el.name).includes(action.payload):allRecipes3.filter(elm=>elm.diets.includes(action.payload))) 
+            const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.createInDb? elm.diets.map(el=> el.name).includes(action.payload): elm.diets.includes(action.payload)) 
+            //const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.diets.map?(el=>el.name===action.payload) 
               return {
                   ...state,
                   recipes: dietsFilter 
