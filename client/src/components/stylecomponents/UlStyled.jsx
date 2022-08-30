@@ -14,11 +14,23 @@ export const UlStyled = styled.ul`
    margin: 0;
   padding: 0;
  `
+ export const UlStyled2 = styled.ul`
+  background-color: #ccc;
+  list-style:none;
+  border: 2px solid black;
+  border-radius: 6px;
+   margin-left: 11em;
+   width:800px;
+  padding: 0;
+  display: block;
+
+ `
  export const LiStyled= styled.li`
    display:inline-block;
    font-size: 35px;
-   
-   
+   &:focus{
+    background-color:orange;
+  }   
  `
  export const LiStyled1= styled.li`
    display:inline-block;
@@ -29,14 +41,33 @@ export const UlStyled = styled.ul`
     padding-botton: 7px;
       
  `
+ export const LiStyled2= styled.li`
+   display:inline-block;
+   font-size: 18px;
+   font-bold:true;
+   padding-left: 10px;
+    margin-letf: 4em;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-botton: 5px;
+      
+ `
 
  export const AStyled=styled.a`
     padding: 5px;
     margin: 4px;
-    display: inline-block`
+    display: inline-block
+    &:focus{
+      border-botom: 2px solid #ccc;
+      background-color:red;
+    }
+    `
 
 export const AStyled1=styled.a`
-    
+  &:focus{
+       border-botom: 2px solid #ccc;
+       background-color:red;
+    }  
     margin: 7px;
     display: inline-block`   
 

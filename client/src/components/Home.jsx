@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import { BotonStyled1 } from './stylecomponents/BotonStyled';
 import { DivStyled2, DivStyled3 } from './stylecomponents/DivStyled';
 import { LabelStyled } from './stylecomponents/LabelStyled';
+import { SelectStyled } from './stylecomponents/SelectStyled';
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -62,21 +63,19 @@ export default function Home(){
                         <SearchBar/>
             <DivStyled3>
             <LabelStyled>Order By: </LabelStyled>    
-            <LabelStyled>Name Recipe</LabelStyled>
-                <select  onChange={e=>handleSortAlf(e)}>
+            <LabelStyled>Name Recipe: </LabelStyled>
+                <SelectStyled  onChange={e=>handleSortAlf(e)}>
                     <option value = 'asc'>Ascendente </option>
                     <option value='des'>Descendente </option>
-                </select>
-                <LabelStyled>Health Score</LabelStyled>
-                <select id='tipoOrden' onChange={e=>handleSortHealthScore(e)}>
+                </SelectStyled>
+                <LabelStyled>Health Score: </LabelStyled>
+                <SelectStyled id='tipoOrden' onChange={e=>handleSortHealthScore(e)}>
                     <option value = 'asc'>Ascendente</option>
                     <option value='des'>Descendente</option>
-                </select>
-                <LabelStyled>
-                 Type Diet   
-                </LabelStyled>                      
+                </SelectStyled>
+                <LabelStyled>Type Diet: </LabelStyled>                      
                                
-                <select onChange={e=>handleFilterDiets(e)}> 
+                <SelectStyled onChange={e=>handleFilterDiets(e)}> 
                 <option value="All">Todas</option>
                 <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
                     <option value= "gluten free">gluten free</option>
@@ -89,7 +88,7 @@ export default function Home(){
                     <option value= "ketogenic" >ketogenic</option>
                     <option value= "fodmap friendly">fodmap friendly</option>
                     
-                </select>
+                </SelectStyled>
 
                             
             </DivStyled3>
@@ -97,12 +96,12 @@ export default function Home(){
                 
                 
                 
-                <LabelStyled>Select by</LabelStyled>
-                <select onChange={e=>handleFilterCreaDb(e)}>
+                <LabelStyled>Select by: </LabelStyled>
+                <SelectStyled onChange={e=>handleFilterCreaDb(e)}>
                     <option value='All'>Todas las recetas</option>
                     <option value='creadb'>Creadas</option>
                     <option value='infapi'>Recetas foodApi</option>
-                </select>
+                </SelectStyled>
                 <BotonStyled1 onClick={e=>{handleClick(e)}}>
                     Volver a cargar todas las recetas
                 </BotonStyled1>    

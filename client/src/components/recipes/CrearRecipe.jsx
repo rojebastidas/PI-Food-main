@@ -2,7 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {postRecipes, getDiets} from '../../actions/index'
 import {useDispatch, useSelector} from "react-redux";
-import { BotonStyled } from '../stylecomponents/BotonStyled';
+import { BotonStyled1 } from '../stylecomponents/BotonStyled';
+import { DivStyled4 } from '../stylecomponents/DivStyled';
+import { LabelStyled2, LabelStyled3 } from '../stylecomponents/LabelStyled';
+import { TextAreaStyled } from '../stylecomponents/TextAreaStyled';
+import { InputStyled1 } from '../stylecomponents/InputStyled';
+import { PStyled1 } from '../stylecomponents/PStyled';
+import { SelectStyled1 } from '../stylecomponents/SelectStyled';
+import { UlStyled2, LiStyled2 } from '../stylecomponents/UlStyled';
 
 function validate(input){
     // let errores = {};
@@ -96,7 +103,7 @@ function handleSubmit(e){
     e.preventDefault();
     console.log(input)
     dispatch(postRecipes(input))
-    alert("Receta Creada") 
+    alert("Receta Creada con exito") 
     setInput({
         name:"",
         summary:"",
@@ -114,29 +121,29 @@ useEffect(()=>{
 },[]);
 
 return(
-    <div>
-        <Link to= '/Home'>Pagina Principal</Link> 
+    <DivStyled4>
+        {/* <Link to= '/Home'>Pagina Principal</Link>  */}
           <h2> Crear Recipe</h2>
           <form onSubmit={(e)=>handleSubmit(e)}>
             <div>
-                <label>Nombre:</label>
-                <input
+                <LabelStyled3>Nombre:</LabelStyled3>
+                <InputStyled1
                   type="text"
                   value={input.name}
                   name="name"
                   placeholder='Ingrese nombre de la receta'
                   className={errores.name && 'danger'}
                   onChange={handleChange}  
+                  autoFocus
                 />
                 {errores.name && (
-                    <p className = 'error'>{errores.name}</p>
+                    <PStyled1 className = 'error'>{errores.name}</PStyled1>
                 )} 
             </div>
             <div>
-                <label>Resumen del plato</label>
-                <textarea 
-                 cols="30" 
-                 rows="10"
+                <LabelStyled2>Resumen del plato: </LabelStyled2>
+                <TextAreaStyled
+                 
                  value={input.summary}
                  name="summary" 
                  className={errores.summary && 'danger'}
@@ -144,12 +151,12 @@ return(
                  onChange={handleChange}
                  />
                    {errores.summary && (
-                    <p className = 'error'>{errores.summary}</p>
+                    <PStyled1 className = 'error'>{errores.summary}</PStyled1>
                 )}  
             </div>
              <div>
-                <label >Nivel de comida saludable</label>
-                <input
+                <LabelStyled3 >Nivel de comida saludable: </LabelStyled3>
+                <InputStyled1
                   type="number"
                   value={parseInt(input.healthScore)}
                   name="healthScore"
@@ -157,12 +164,12 @@ return(
                   onChange={handleChange}
                 />
                  {errores.healthScore && (
-                    <p className = 'error'>{errores.healthScore}</p>
+                    <PStyled1 className = 'error'>{errores.healthScore}</PStyled1>
                 )} 
              </div>   
              <div>
-                <label>Paso a paso</label>
-                <textarea 
+                <LabelStyled2>Paso a paso: </LabelStyled2>
+                <TextAreaStyled 
                  cols="30" 
                  rows="10"
                  value={input.steps}
@@ -172,8 +179,8 @@ return(
                  />
             </div>
             <div>
-                <label>Imagen:</label>
-                <input
+                <LabelStyled3>Imagen:</LabelStyled3>
+                <InputStyled1
                   type="text"
                   value={input.image}
                   name="image"
@@ -181,24 +188,27 @@ return(
                   onChange={handleChange}
 
                 />
+                <LabelStyled3>Diets: </LabelStyled3>
+
             </div> 
-            <select onChange={(e)=> handleSelect(e)}>
+            <SelectStyled1 onChange={(e)=> handleSelect(e)}>
                 { diets.map((diet)=>(
                     <option value={diet.name}>{diet.name}</option>
                 ))
 
                 }
-            </select >
-            <ul><li>{input.diets.map(elm=> elm + ", ")}</li></ul>
+            </SelectStyled1 >
+             <UlStyled2><LiStyled2>{input.diets.map(elm=> elm + ", ")}</LiStyled2></UlStyled2> 
+            
             {    
                 errores.hasOwnProperty('name') || errores.hasOwnProperty('summary') || errores.hasOwnProperty('healthScore') ?
-                <p> Favor completar la informacion requerida </p>:<BotonStyled type= 'submit' >Crear Receta</BotonStyled> 
+                <PStyled1> Favor completar la informacion requerida </PStyled1>:<BotonStyled1 type= 'submit' >Crear Receta</BotonStyled1> 
                 
               }
             
              
 
           </form>
-    </div>
+    </DivStyled4>
 )
 }

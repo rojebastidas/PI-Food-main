@@ -13,7 +13,7 @@ const {API_KEY,API_KEY1,API_KEY2,API_KEY3,API_KEY4,API_KEY5,API_KEY6,API_KEY7,AP
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo = async()=>{
-    //const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY8}&addRecipeInformation=true&number=100`);
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
     //console.log(apiUrl.data.results.healthScore)
     //console.log("apiurl----------",apiUrl.data);
 
@@ -55,14 +55,20 @@ const getDbInfo = async () => {
 }
 //toma la informacion de la api y la concatena con la de la base de datos
 const getAllRecipes = async ()=> {
-    //const apiInfo=await getApiInfo();
+    //try{
+    const apiInfo=await getApiInfo();
+   
     const dbInfo = await getDbInfo();
-   // const infoTotal = apiInfo.concat(dbInfo);
-    const infoTotal = dbInfo;
+    
+    const infoTotal = apiInfo.concat(dbInfo);
+    //const infoTotal = dbInfo;
     //return apiInfo;
     return infoTotal;
    // console.log(dbInfo);
     //return dbInfo;
+    //} catch(error){
+     //   console.log("Error al traer la información de la api mas la db");
+   // }
 }
 router.get('/recipes',async(req,res)=>{
     const name=req.query.name
@@ -95,7 +101,7 @@ router.get('/recipes/:idReceta',async(req,res)=>{
     }
 })
 router.get('/diets',async(req,res)=>{
-   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY8}&addRecipeInformation=true&number=100`); 
+   const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
       apiDiets.forEach(elm=> {
         //console.log("elemenforeach",elm);

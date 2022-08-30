@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import { getNameRecipes } from '../actions';
 import { BotonStyled1 } from './stylecomponents/BotonStyled';
 import { DivStyled3 } from './stylecomponents/DivStyled';
+import { InputStyled } from './stylecomponents/InputStyled';
 export default function SearchBar(){
     const dispatch = useDispatch()
     const [name,setName]=useState("")
@@ -22,7 +23,7 @@ export default function SearchBar(){
 
     return(
         <DivStyled3>
-            <input 
+            <InputStyled 
                type="text" 
                placeholder = "Buscar..."
                onChange ={(e)=>handleInputChange(e)}

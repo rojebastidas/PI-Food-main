@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import { DivStyled } from "../stylecomponents/DivStyled";
+import { ImageStyled } from "../stylecomponents/ImageStyled";
 //card diets
 //export default function Card({name, diets, image,healtScore,id }){
     export default function Card({name, diets,image,healtScore,id }){
@@ -9,7 +10,7 @@ import { DivStyled } from "../stylecomponents/DivStyled";
          <DivStyled>
              
                 <h3>Recipe: {name}</h3>
-                <img src={image} alt="img not found" />       
+                <ImageStyled src={image} alt="img not found" />       
                   <h5>Dietas: {diets}</h5>    
             
                 <p>Health Score: {healtScore}</p>

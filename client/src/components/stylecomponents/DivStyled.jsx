@@ -11,10 +11,10 @@ export const DivStyled = styled.div`
   margin-top: 2em;
   margin-botton: 2em;
   padding: 4px 12px;
-  border: 4px solid #09f;
+  border: 4px solid green;
   width=400px;
   height= 400px;
-  border-radius:20px>;
+  border-radius:7px;
   &:hover{
     background: #09f;
     border-color: black;
@@ -29,6 +29,8 @@ export const DivStyled = styled.div`
   margin-top: 2em;
   margin-botton: 2em;
   border: 4px solid #09f;
+  border-radius: 5px;
+
     }
   `
 
@@ -37,4 +39,17 @@ export const DivStyled = styled.div`
   font-size: 1em;
   border: 3px solid #09f;
     }
+  `
+  export const DivStyled4 = styled.div`
+  background: #e5e5e5;
+  
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 2em;
+  margin-botton: 2em;
+  padding: 4px 8px;
+  border: 4px solid #09f;
+  width=400px;
+  height= 400px;
+  border-radius:20px;
   `
