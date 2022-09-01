@@ -32,6 +32,23 @@ export const InputStyled = styled.input`
     border-color: black;
   }
   `
+  export const InputStyled2 = styled.input`
+  background: #8ec667;
+  font-size: 1em;
+  margin-left: 180px;
+  margin-right: 10em;
+  margin-top: 1em;
+  width:200px;
+  padding: 2px 4px;
+  border: 2px solid #09f;
+  border-radius: 4px;
+  display: block;
+
+  &:focus{
+    background:#e0e468;
+    border-color: black;
+  }
+  `
   /*export const BotonStyled1 = styled.button`
   background: green;
   
