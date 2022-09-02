@@ -14,7 +14,7 @@ const {API_KEY,API_KEY1,API_KEY2,API_KEY3,API_KEY4,API_KEY5,API_KEY6,API_KEY7,AP
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo = async()=>{
     try{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`);
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY6}&addRecipeInformation=true&number=100`);
     //console.log(apiUrl.data.results.healthScore)
     //console.log("apiurl----------",apiUrl.data);
     
@@ -78,6 +78,7 @@ const getAllRecipes = async ()=> {
 }
 router.get('/recipes',async(req,res)=>{
     const name=req.query.name
+    //const {name}=req.params
     const recipesTotal = await getAllRecipes();
      if (name){
        
@@ -106,9 +107,42 @@ router.get('/recipes/:idReceta',async(req,res)=>{
         res.status(200).send(recipesTotal)
     }
 })
+router.get('/recipes/:name',async(req,res)=>{
+    const {name}=req.params
+    //console.log(idReceta);
+    const recipesTotal = await getAllRecipes();
+
+     if (name){
+            let recipeName = await recipesTotal.filter(elem => elem.name==name) 
+            recipeName.length ?
+            res.status(200).send(recipeName) :
+            res.status(404).send('No esta la receta');
+        
+     }else{
+        res.status(200).send(recipesTotal)
+    }
+})
+//eliminar una receta
+router.get('/recipes/:deleteId',async(req,res)=>{
+    const {deleteId}=req.params
+    //console.log(idReceta);
+    const recipesTotal = await getAllRecipes();
+
+     if (deleteId){
+            let recipeId = await recipesTotal.filter(elem => elem.id===deleteId) 
+            recipeId.length ?
+            res.status(200).send(recipeId) :
+            res.status(404).send('No esta la receta');
+        
+     }else{
+        res.status(200).send(recipesTotal)
+    }
+})
+
+
 router.get('/diets',async(req,res)=>{
    try{ 
-    const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=100`); 
+    const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY6}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
       apiDiets.forEach(elm=> {
         //console.log("elemenforeach",elm);

@@ -284,7 +284,7 @@ return(
                 // <PStyled1> Favor completar la informacion requerida </PStyled1>:<BotonStyled1 type= 'submit' >Crear Receta</BotonStyled1>   */}
                 <BotonStyled1 
                    type= 'submit'  
-                //    disabled={errores.name || errores.summary || errores.healthScore ? true:false} 
+                    disabled={errores.name || errores.summary || errores.healthScore ? true:false} 
                   >Crear Receta</BotonStyled1> 
                 
                 

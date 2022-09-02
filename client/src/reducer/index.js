@@ -5,7 +5,9 @@
             FILTER_CREADB,
             ORDER_NAME,
             ORDER_HEALT_SCORE,
-            GET_RECIPE_DETAIL
+            GET_RECIPE_DETAIL,
+            FILTER_MAYORCIN,
+            DELETE_RECIPE
         } from '../actions'
 
 const initialState = {
@@ -53,7 +55,7 @@ function rootReducer (state = initialState, action){
              const allRecipes3 = state.allRecipes
             // const dietsFilter = action.payload === 'All' ? allRecipes : allRecipes.filter(elm=>elm.status===action.payload)
             //const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.createInDb? elm.diets.map(el=> el.name).includes(action.payload):allRecipes3.filter(elm=>elm.diets.includes(action.payload))) 
-            const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.createInDb? elm.diets.map(el=> el.name).includes(action.payload): elm.diets.includes(action.payload)) 
+              const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.createInDb? elm.diets.map(el=> el.name).includes(action.payload): elm.diets.includes(action.payload)) 
             //const dietsFilter = action.payload === 'All' ? allRecipes3 : allRecipes3.filter(elm=>elm.diets.map?(el=>el.name===action.payload) 
               return {
                   ...state,
@@ -73,7 +75,49 @@ function rootReducer (state = initialState, action){
                 recipes: action.payload === 'All' ? allRecipes1 : creadbFilter
                 //recipes: action.payload === 'All' ? state.allRecipes : creadbFilter
             }
-        
+             //*****Filtrar por healtScore > 50 */
+            // case FILTER_MAYORCIN:
+            //     //state.recipes= state.allRecipes
+            //     const allRecipes6 = state.allRecipes
+            //     const hsFilter = action.payload === 'mayorCin' ?  allRecipes6.filter(elm=>elm.healthScore > 50) : allRecipes6
+            //     return {
+            //         ...state,
+            //         recipes: hsFilter 
+            //         //=== 'All' ? allRecipes1 : creadbFilter
+            //         //recipes: action.payload === 'All' ? state.allRecipes : creadbFilter
+            //     }
+            //case export function getRecipeDetail(id){
+//     return async function (dispatch){
+//         try{
+//             //var json = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=07d4ff120e37438592d7340208551d96&addRecipeInformation=true&number=100`);
+//             var json = await axios.get("http://localhost:3001/recipes/" + parseInt(id));
+//             return dispatch({
+//                 type: GET_RECIPE_DETAIL,
+//                 payload: json.data
+//             })
+//         }catch(error){
+//             console.log(error)
+//         }
+//     }
+// }    
+       //* Borrar una receta  
+        // case DELETE_RECIPE:
+        //     //case DELETE_MOVIE:
+        //         console.log("action",action.payload)
+        //          return{
+                    
+        //            ...state,
+        //            recipes: state.recipes.filter(evento=>{
+        //              return parseInt(evento.id) !== parseInt(action.payload)
+        //            })
+        //          }   
+                // const allRecipes7 = state.allRecipes
+                // const deleteFilter = action.payload === 'mayorCin' ?  allRecipes6.filter(elm=>elm.healthScore > 95) : allRecipes6
+                // return {
+                //     ...state,
+                //     recipes: hsFilter
+                     
+                
         case ORDER_NAME:
             //state.recipes= state.allRecipes
             const allRecipes4 = state.allRecipes

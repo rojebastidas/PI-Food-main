@@ -4,9 +4,11 @@ export const GET_NAME_RECIPES = "GET_NAME_RECIPES";
 export const GET_DIETS = "GET_DIETS";
 export const FILTER_DIETS = "FILTER_DIETS" ;
 export const FILTER_CREADB = "FILTER_CREADB";
+export const FILTER_MAYORCIN = "FILTER_MAYORCIN";
 export const ORDER_NAME = "ORDER_NAME" ;
 export const ORDER_HEALT_SCORE = "ORDER_HEALT_SCORE" ;
 export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL" ;
+export const  DELETE_RECIPE= "DELETE_RECIPE";
 
 
 require ("dotenv").config();
@@ -26,16 +28,49 @@ export function getRecipes(){
     }
 
 }
+// export function getNameRecipes(name){
+//     return async function(dispatch){
+//         try{
+//             var json = await axios.get("http://localhost:3001/recipes?name=" + name);
+//             return dispatch({
+//                 type: GET_NAME_RECIPES,
+//                 payload: json.data
+//             });
+//         }catch(error){
+//             console.log(error);
+//         }
+//     }
+// }
 export function getNameRecipes(name){
     return async function(dispatch){
         try{
-            var json = await axios.get("http://localhost:3001/recipes?name=" + name);
+            var json = await axios.get(`http://localhost:3001/recipes?name=${name}`);
             return dispatch({
                 type: GET_NAME_RECIPES,
                 payload: json.data
             });
         }catch(error){
             console.log(error);
+        }
+    }
+}
+// export const deleteRecipe = (id) => {
+//     return {
+//         type: DELETE_RECIPE,
+//         payload: id
+//     }
+//  };
+export function deleteRecipe(id){
+    return async function (dispatch){
+        try{
+            //var json = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=07d4ff120e37438592d7340208551d96&addRecipeInformation=true&number=100`);
+           // var json = await axios.get("http://localhost:3001/recipes/" + parseInt(id));
+            return dispatch({
+                type: DELETE_RECIPE,
+                payload: id
+            })
+        }catch(error){
+            console.log(error)
         }
     }
 }
@@ -72,6 +107,12 @@ export function filterCreaDb(payload){
         payload
     }
 }
+// export function filterMayorCin(payload){
+//     return{
+//         type: FILTER_MAYORCIN,
+//         payload
+//     }
+// }
 export function orderName(payload){
     return {
         type: ORDER_NAME,

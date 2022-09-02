@@ -11,6 +11,9 @@ import { ImageStyled } from "./stylecomponents/ImageStyled";
 
 
 
+
+
+
  export default function RecipeDetail(){
   const dispatch = useDispatch()
     //useParams()=>React.useParams(); 
@@ -25,7 +28,7 @@ import { ImageStyled } from "./stylecomponents/ImageStyled";
     
     useEffect(()=> {
       //let {id}=useParams; 
-      console.log("id",id)
+      //console.log("id",id)
         dispatch(getRecipeDetail(id));
     },[])
 
@@ -46,7 +49,14 @@ return (
                 <LabelStyled1>Health Score: {recDetail[0].healthScore }</LabelStyled1>
                 
                 <PStyled><LabelStyled1>Resumen del Plato: </LabelStyled1>  {recDetail[0].summary }</PStyled>
-                <PStyled> <LabelStyled1> Paso a paso: </LabelStyled1> {recDetail[0].steps +"  " }</PStyled>
+                <PStyled> <LabelStyled1> Paso a paso: </LabelStyled1> 
+                              {recDetail[0].steps +"  " }</PStyled>
+                {/* <ul>
+                    {recDetail[0].steps}
+
+                    }
+                </ul> */}
+                
                 {/* <label>Paso a pasd 1</label> */}
 
                 {/* {steps[0]} */}

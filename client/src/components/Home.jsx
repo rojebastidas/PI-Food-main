@@ -10,6 +10,9 @@ import { BotonStyled1 } from './stylecomponents/BotonStyled';
 import { DivStyled2, DivStyled3 } from './stylecomponents/DivStyled';
 import { LabelStyled } from './stylecomponents/LabelStyled';
 import { SelectStyled } from './stylecomponents/SelectStyled';
+import { SelectStyled1 } from './stylecomponents/SelectStyled';
+import { getDiets} from '../actions';
+//,filterMayorCin 
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -24,8 +27,10 @@ export default function Home(){
         setCurrentPage(pageNumber)
     } 
 
+    const recDiets = useSelector((state)=>state.diets)
     useEffect(()=>{
         dispatch(getRecipes());
+        dispatch(getDiets());
 
     },[dispatch])
     function handleClick(e){
@@ -55,6 +60,10 @@ export default function Home(){
     function handleFilterCreaDb(e){
         dispatch(filterCreaDb(e.target.value))
     }
+    //filter mayor de 50
+    // function handleFilterMayorCin(e){
+    //     dispatch(filterMayorCin(e.target.value))
+    // }
 
     return (
         <div> 
@@ -75,7 +84,7 @@ export default function Home(){
                 </SelectStyled>
                 <LabelStyled>Type Diet: </LabelStyled>                      
                                
-                <SelectStyled onChange={e=>handleFilterDiets(e)}> 
+                {/* <SelectStyled onChange={e=>handleFilterDiets(e)}> 
                 <option value="All">Todas</option>
                 <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
                     <option value= "gluten free">gluten free</option>
@@ -88,7 +97,14 @@ export default function Home(){
                     <option value= "ketogenic" >ketogenic</option>
                     <option value= "fodmap friendly">fodmap friendly</option>
                     
-                </SelectStyled>
+                </SelectStyled> */}
+                <SelectStyled onChange={(e)=> handleFilterDiets(e)}>
+                { recDiets.map((diet)=>(
+                    <option value={diet.name}>{diet.name}</option>
+                ))
+
+                }
+            </SelectStyled >
 
                             
             </DivStyled3>
@@ -102,6 +118,13 @@ export default function Home(){
                     <option value='creadb'>Creadas</option>
                     <option value='infapi'>Recetas foodApi</option>
                 </SelectStyled>
+                {/*<LabelStyled>Healt score mayor a 50: </LabelStyled>
+                 <SelectStyled onChange={e=>handleFilterMayorCin(e)}>
+                    <option value='All'>Todas las recetas</option>
+                    <option value='mayorCin'>Healt Score Mayor 50</option>
+                    
+                </SelectStyled> */}
+
                 <BotonStyled1 onClick={e=>{handleClick(e)}}>
                     Volver a cargar todas las recetas
                 </BotonStyled1>    
