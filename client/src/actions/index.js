@@ -89,8 +89,7 @@ export function postRecipes(payload){
         return respuesta;
     }
 }
-
-
+  
 
 
 export function filterRecipesDiets(payload){
@@ -141,3 +140,15 @@ export function getRecipeDetail(id){
         }
     }
 }
+
+
+// var promise = new Promise(function(resolve, reject) {
+//     // Hacer cosas acá dentro, probablemente asincrónicas.
+//     fs.readFile('./archivo.txt', 'utf8', function(err, data) { 
+//       if (err) {
+//         return reject(Error("Algo se rompió"));
+//       }
+//       //console.log(data);    
+//       resolve(data);
+//     }); 
+//   });

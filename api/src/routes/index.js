@@ -8,13 +8,13 @@ const { Recipe, Diet } =require('../db');
 const e = require('express');
 const router = Router();
 require ("dotenv").config();
-const {API_KEY,API_KEY1,API_KEY2,API_KEY3,API_KEY4,API_KEY5,API_KEY6,API_KEY7,API_KEY8} = process.env; 
+const {API_KEY,API_KEY1,API_KEY2,API_KEY3,API_KEY4,API_KEY5,API_KEY6,API_KEY7,API_KEY8,API_KEY9,API_KEY10} = process.env; 
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo = async()=>{
     try{
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY6}&addRecipeInformation=true&number=100`);
+    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY9}&addRecipeInformation=true&number=100`);
     //console.log(apiUrl.data.results.healthScore)
     //console.log("apiurl----------",apiUrl.data);
     
@@ -142,7 +142,7 @@ router.get('/recipes/:deleteId',async(req,res)=>{
 
 router.get('/diets',async(req,res)=>{
    try{ 
-    const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY6}&addRecipeInformation=true&number=100`); 
+    const dietsApi=await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY9}&addRecipeInformation=true&number=100`); 
       const apiDiets = await dietsApi.data.results?.map(el => el.diets);
       apiDiets.forEach(elm=> {
         //console.log("elemenforeach",elm);
@@ -163,6 +163,7 @@ router.get('/diets',async(req,res)=>{
    }
    })
    router.post('/recipes', async(req,res)=>{
+    try{
     let {
             name, 
             summary, 
@@ -185,8 +186,12 @@ router.get('/diets',async(req,res)=>{
     })
     recipeCrea.addDiet(dietsBd)
     res.send('Recipe adicionada correctamente')
-
+    }catch(error){
+        res.status(400).send("error al crear la receta")
+    }
+       
     })
+
 
     // router.get('recipes/:id',async (req,res)=>{
     //     const id = req.params.id;

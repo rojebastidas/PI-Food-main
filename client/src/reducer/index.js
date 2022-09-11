@@ -5,9 +5,8 @@
             FILTER_CREADB,
             ORDER_NAME,
             ORDER_HEALT_SCORE,
-            GET_RECIPE_DETAIL,
-            FILTER_MAYORCIN,
-            DELETE_RECIPE
+            GET_RECIPE_DETAIL
+           
         } from '../actions'
 
 const initialState = {
@@ -120,7 +119,7 @@ function rootReducer (state = initialState, action){
                 
         case ORDER_NAME:
             //state.recipes= state.allRecipes
-            const allRecipes4 = state.allRecipes
+            const allRecipes4 = state.recipes
             let ordenarArr = action.payload === 'asc'? 
               // {elemento}=document.getElementById
               

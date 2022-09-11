@@ -157,7 +157,7 @@ function handleSubmit(e){
         setInput({
             name:"",
             summary:"",
-            healthScore: 0,
+            healthScore: "",
             image:"",
             steps:"",
             diets:[]
@@ -271,7 +271,8 @@ return(
 
             </div> 
             <SelectStyled1 onChange={(e)=> handleSelect(e)}>
-                { diets.map((diet)=>(
+                {
+                    diets.map((diet)=>(
                     <option value={diet.name}>{diet.name}</option>
                 ))
 
